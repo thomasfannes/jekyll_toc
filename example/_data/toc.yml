@@ -1,0 +1,6 @@
+collection: chapters
+auto_generated:
+  template: overview.md
+  filename: overview.html
+  root_message: "Table of contents"
+  
