@@ -3,7 +3,7 @@ title: Auto-generated pages
 toc_type: overview
 ---
 
-#{{ page.toc.sec }} {{ page.title }}
+# {{ page.toc.nice_sec }} : {{ page.title }}
 
 By default, all the non-leaf nodes in our table of contents are auto-generated. These pages contain the table of contents of the section and a title. For the rootnode, the title can be specified by in _data/toc.yml, and for other non-leaf nodes, the title is created as follows:
 

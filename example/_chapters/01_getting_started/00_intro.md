@@ -2,7 +2,7 @@
 title: Introduction to TOC
 ---
 
-# {{page.toc.sec }} Introduction to TOC
+# {{ page.toc.nice_sec }} : {{ page.title }}
 
 The TOC module generates a table of contents for a collection. In this example, the collection is the chapters collection, and looks like this:
 

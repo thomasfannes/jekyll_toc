@@ -1,7 +1,7 @@
 ---
 title: Getting started
 ---
-#{{ page.toc.sec }} {{ page.title }}
+# {{ page.toc.nice_sec }} : {{ page.title }}
 
 To use jekyll on your website, you set the following files:
 

@@ -1,6 +1,5 @@
-collection: chapters
-auto_generated:
-  template: overview.md
-  filename: overview.html
-  root_message: "Table of contents"
-  
+chapters:
+   collection: chapters
+   prefix: book
+   template: _templates/overview.md
+   root_title: Table of contents

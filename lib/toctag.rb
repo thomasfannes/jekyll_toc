@@ -15,22 +15,40 @@ module TOC
     def render(context)
       depth = @attributes.fetch("depth", "-1").to_i
       mode = @attributes.fetch("mode", "current")
-    
-      page = (mode == "global" ? context.registers[:site].data['toc']['root'].data : context.registers[:page] )
+           
+      if mode == "current"
+        # check for page in toc
+        if not context.registers[:page]['toc']
+          raise "This page does not belong a TOC collection"
+        end
+        pageData = context.registers[:page]
+        
+      else
+        # find the collection with this name
+        tocDat = context.registers[:site].data['toc']
+        if tocDat and tocDat[mode]
+          pageData = tocDat[mode]['root_doc'].data
+        else
+          raise "The TOC collection '#{mode}' could not be found"
+        end
+      end
       
-      return renderTable(depth, page)
+      return renderTable(depth, pageData)
+      
     end
     
     def createEntry(curDepth, p)
-      "<li><a href=\"#{p.url}\"> #{p.data['toc']['sec']} #{p.data['title']}</a></li>\n"
+      "  "*(curDepth + 1) + "<li><a href=\"#{p.url}\"> #{p.data['toc']['nice_sec']}: #{p.data['title']}</a></li>\n"
     end
     
     def rec_process_entries(curDepth, maxDepth, pageData)
-      if curDepth == maxDepth or not pageData.has_key?('toc')
+      if curDepth == maxDepth or not pageData.has_key?('toc') or pageData['toc']['children'].empty?
         return ""
       end
       
-      str = ([ "<ul>" ] + pageData['toc']['children'].map{ |p| createEntry(curDepth, p) + rec_process_entries(curDepth + 1, maxDepth, p.data) } + ["</ul>"]).join("")     
+      str = "  "*(curDepth) + "<ul>\n"
+      str << pageData['toc']['children'].map{ |p| createEntry(curDepth, p) + rec_process_entries(curDepth + 1, maxDepth, p.data) }.join("")
+      str << "  "*(curDepth) + "</ul>\n"
       return str
       
     end
