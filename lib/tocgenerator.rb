@@ -81,9 +81,9 @@ module TOC
   end
   
     
-  def self.positionsToString(positions)
-    return positions.map{|i| i.to_s + "."}.join("")
-  end
+  #def self.positionsToString(positions)
+    #return positions.map{|i| i.to_s + "."}.join("")
+  #end
   
   class SingleTOCGenerator 
     @collection_name
@@ -101,7 +101,7 @@ module TOC
       if node.parent
         return node.src_id.humanize
       else
-        return @config['auto-generated']['root_message'] || "Table of contents"
+        return @config['root_title'] || "Table of contents"
       end
     end
     
